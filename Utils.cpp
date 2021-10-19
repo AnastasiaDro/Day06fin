@@ -4,7 +4,7 @@
 
 #include "Utils.hpp"
 
-void printMsg(std::string &msg)
+void printMsg(std::string const &msg)
 {
 	std::cout << msg << std::endl;
 }

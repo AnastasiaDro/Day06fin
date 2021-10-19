@@ -9,7 +9,7 @@
 #include <string>
 #include <iostream>
 
-void printMsg(std::string msg);
+void printMsg(std::string const &msg);
 
 
 #endif //DAY06_UTILS_HPP

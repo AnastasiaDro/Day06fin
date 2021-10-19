@@ -63,12 +63,16 @@ void Converter::parseInt() {
 	else {
 		this->val_int = tmp;
 		this->val_chr = static_cast<char>(this->val_int);
+		this->val_double = static_cast<double>(this->val_int);
+		this->val_float = static_cast<float>(this->val_int);
 	}
 }
 
 void Converter::parseDouble() {
 	this->stream >> this->val_double;
-
+	this->val_int = static_cast<int>( this->val_double);
+	this->val_chr = static_cast<char>(this->val_double);
+	this->val_float = static_cast<float>(this->val_double);
 }
 
 void Converter::parseFloat() {
@@ -82,6 +86,6 @@ void Converter::parseChar() {
 bool Converter::isInLimits(long l) {
 	if (l > std::numeric_limits<int>::max() || l < std::numeric_limits<int>::min())
 		return false;
-	return true
+	return true;
 }
 
