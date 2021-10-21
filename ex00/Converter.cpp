@@ -40,11 +40,11 @@ void Converter::findType() {
 		this->type = TYPE_CHAR;
 		return;
 	}
-	else if (this->_s.find('f') > 0) {
+	else if (this->_s.find("f") != -1) {
 		this->type = TYPE_FLOAT;
 		return;
 	}
-	else if (this->_s.find('.') > 0) {
+	else if (this->_s.find(".") != -1) {
 		this->type = TYPE_DOUBLE;
 		return;
 	}
@@ -76,8 +76,8 @@ void Converter::parseInt() {
 	this->stream >> tmp;
 	if (stream.fail() || !isIntLimits(tmp))
 	{
-		this->strings[TYPE_INT] = "impossible";
-		this->strings[TYPE_CHAR] = "impossible";
+		this->strings[TYPE_INT] = "int: impossible";
+		this->strings[TYPE_CHAR] = "char: impossible";
 	}
 	else
 	{
@@ -162,12 +162,12 @@ char Converter::getValChr() const {
 bool Converter::isCharLimits(long tmp) {
 	if (tmp < 0 || tmp > 127)
 	{
-		this->strings[TYPE_CHAR] = "impossible";
+		this->strings[TYPE_CHAR] = "char: impossible";
 		return false;
 	}
 	if (tmp < 33  || tmp > 126)
 	{
-		this->strings[TYPE_CHAR] = "Non displayable";
+		this->strings[TYPE_CHAR] = "char: Non displayable";
 		return false;
 	}
 	return true;
@@ -258,7 +258,7 @@ void Converter::genString(int i) {
 			ss >> tmp;
 			strings[TYPE_DOUBLE] = "double: " + tmp;
 			if (strings[TYPE_FLOAT].find('.') <= 0)
-				strings[TYPE_FLOAT] += ".0";
+				strings[TYPE_FLOAT] += ".00";
 			break;
 		default:
 			break;
