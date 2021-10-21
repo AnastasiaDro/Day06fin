@@ -1,7 +1,7 @@
-NAME = convert
+NAME = ex01
 
-SRC = main.cpp Utils.cpp
-HEAD = Utils.hpp
+SRC = main.cpp Utils.cpp Data.cpp
+HEAD = Utils.hpp Data.hpp
 
 OBJS = $(SRC:.cpp=.o)
 
