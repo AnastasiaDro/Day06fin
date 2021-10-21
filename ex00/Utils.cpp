@@ -67,10 +67,8 @@ std::string getStringFromDouble(double d)
 	ss >> tmp;
 	return tmp;
 }
-bool checkArg(int argc, char *str)
+bool checkArg(char *str)
 {
-	if (argc != 2)
-		return false;
 	if(!strcmp(str, "nan") || !strcmp(str, "nanf") || !strcmp(str, "inf") || !strcmp(str, "inff") \
 			|| !strcmp(str, "+inf") || !strcmp(str, "+inff") || !strcmp(str, "-inf") || !strcmp(str, "-inff"))
 		return true;

@@ -19,7 +19,7 @@ void printDouble(double d, double rem);
 
 void printFloat(float f, double rem);
 
-bool checkArg(int argc, char *str);
+bool checkArg(char *str);
 
 
 std::string getStringFromDouble(double d);

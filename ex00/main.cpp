@@ -14,13 +14,14 @@ int main(int argc, char **argv) {
 	double	rem;
 	double	tmp;
 
-	std::string avstr = argv[1];
-
-	if (!checkArg(argc, argv[1]))
+	if (argc != 2)
 	{
 		printMsg("Invalid arg!");
 		exit(1);
 	}
+	std::string avstr = argv[1];
+
+
 
 	d = strtod(argv[1], NULL);
 	rem = modf(d, &tmp);
@@ -33,6 +34,11 @@ int main(int argc, char **argv) {
 	}
 	else
 	{
+		if (!checkArg(argv[1]))
+		{
+			printMsg("Invalid arg!");
+			exit(1);
+		}
 		std::cout << std::setprecision((int)strlen(argv[1]));
 		c = static_cast<char>(d);
 		i = static_cast<int>(d);
