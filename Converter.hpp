@@ -13,7 +13,6 @@ class Converter {
 private:
 	Converter();
 	const std::string _s;
-
 	int val_int;
 	char val_chr;
 	float val_float;
@@ -21,6 +20,8 @@ private:
 	std::stringstream stream;
 	int type;
 
+	std::string sign;
+	bool isNan;
 	std::string chrS;
 	std::string intS;
 	std::string floatS;
@@ -50,7 +51,7 @@ public:
 	Converter(Converter &orig);
 	~Converter();
 	Converter &operator=(const Converter &orig);
-
+	bool isArgValid();
 //getters
 	int getValInt() const;
 	char getValChr() const;
@@ -59,7 +60,7 @@ public:
 	int getType() const;
 
 	void convert();
-
+	void showVals();
 
 	 //показывает значение
 

@@ -126,6 +126,14 @@ bool Converter::isIntLimits(long l) {
 }
 
 void Converter::convert() {
+	if (this->isNan)
+	{
+		this->chrS = "impossible";
+		this->intS = "impossible";
+		this->doubleS = sign + "nan";
+		this->floatS = sign + "nanf";
+		return;
+	}
 	findType();
 	setVals();
 }
@@ -162,5 +170,42 @@ bool Converter::isCharLimits(long tmp) {
 		return false;
 	}
 	return true;
+}
+
+bool Converter::isArgValid() {
+	int i = 0;
+	int flagDot = 0;
+	int flagF = 0;
+	long len = this->_s.length();
+	if(len == 1)
+		return true;
+	if (this->_s[i] == '+' || this->_s[i] == '-')
+		i++;
+	if((this->_s == "nan") || (this->_s == "nanf"))
+	{
+		this->isNan = true;
+		return true;
+	}
+	while(this->_s[i])
+	{
+		if (!isdigit(this->_s[i]))
+		{
+			if(this->_s[i] != '.' && this->_s[i] != 'f')
+				return false;
+			this->_s[i] == '.' ? flagDot++ : flagF++;
+			if (flagF > 1 || flagDot > 1)
+				return false;
+		}
+		i++;
+	}
+	return true;
+}
+
+void Converter::showVals() {
+	std::cout << this->chrS << "\n"
+			  << this->intS << "\n"
+			  << this->floatS << "f" << "\n"
+			  << this->doubleS
+			  << std::endl;
 }
 
