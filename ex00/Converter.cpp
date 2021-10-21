@@ -40,11 +40,11 @@ void Converter::findType() {
 		this->type = TYPE_CHAR;
 		return;
 	}
-	else if (this->_s.find("f") != -1) {
+	else if (static_cast <int>(this->_s.find('f')) != -1) {
 		this->type = TYPE_FLOAT;
 		return;
 	}
-	else if (this->_s.find(".") != -1) {
+	else if (static_cast <int>(this->_s.find('.')) != -1) {
 		this->type = TYPE_DOUBLE;
 		return;
 	}
@@ -90,7 +90,7 @@ void Converter::parseInt() {
 }
 
 void Converter::parseDouble() {
-	char *tmp = NULL;
+	char *tmp;
 	this->stream >> tmp;
 	this->val_double = strtod(tmp, NULL);
 	long tmp_long = static_cast<long>(this->val_double);
@@ -124,7 +124,7 @@ void Converter::parseChar() {
 bool Converter::isIntLimits(long l) {
 	if (l > std::numeric_limits<int>::max() || l < std::numeric_limits<int>::min())
 	{
-		this->strings[TYPE_INT] = "impossible";
+		this->strings[TYPE_INT] = "int: impossible";
 		return false;
 	}
 	return true;
@@ -249,16 +249,16 @@ void Converter::genString(int i) {
 			ss << val_float;
 			ss >> tmp;
 			strings[TYPE_FLOAT] = "float: " + tmp;
-			if (strings[TYPE_FLOAT].find('.') <= 0)
-				strings[TYPE_FLOAT] += "0";
+			if (static_cast <int>(strings[TYPE_FLOAT].find('.')) == -1)
+				strings[TYPE_FLOAT] += ".0";
 			strings[TYPE_FLOAT] += "f";
 			break;
 		case TYPE_DOUBLE:
 			ss << val_double;
 			ss >> tmp;
 			strings[TYPE_DOUBLE] = "double: " + tmp;
-			if (strings[TYPE_FLOAT].find('.') <= 0)
-				strings[TYPE_FLOAT] += ".00";
+			if (static_cast <int>(strings[TYPE_DOUBLE].find('.')) == -1)
+				strings[TYPE_DOUBLE] += ".0";
 			break;
 		default:
 			break;
