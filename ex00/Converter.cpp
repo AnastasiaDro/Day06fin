@@ -85,7 +85,7 @@ void Converter::parseInt() {
 }
 
 void Converter::parseDouble() {
-	char *tmp;
+	char *tmp = NULL;
 	this->stream >> tmp;
 	this->val_double = strtod(tmp, NULL);
 	long tmp_long = static_cast<long>(this->val_double);
@@ -134,6 +134,16 @@ void Converter::convert() {
 		this->floatS = sign + "nanf";
 		return;
 	}
+	if (this->isInf)
+	{
+		if (this->sign.empty())
+			sign = "+";
+		this->chrS = "impossible";
+		this->intS = "impossible";
+		this->doubleS = sign + "inf";
+		this->floatS = sign + "inff";
+		return;
+	}
 	findType();
 	setVals();
 }
@@ -180,10 +190,19 @@ bool Converter::isArgValid() {
 	if(len == 1)
 		return true;
 	if (this->_s[i] == '+' || this->_s[i] == '-')
+	{
+		_s[i] == '-' ? this->sign = "-" : this->sign = "+";
 		i++;
-	if((this->_s == "nan") || (this->_s == "nanf"))
+	}
+
+	if((!strncmp(this->_s.c_str(),"nan", 3) || !strncmp(this->_s.c_str(),"nanf", 4)))
 	{
 		this->isNan = true;
+		return true;
+	}
+	if((!strncmp(&this->_s.c_str()[i],"inf", 3) || !strncmp(&this->_s.c_str()[i],"inff", 4)))
+	{
+		this->isInf = true;
 		return true;
 	}
 	while(this->_s[i])
@@ -204,7 +223,7 @@ bool Converter::isArgValid() {
 void Converter::showVals() {
 	std::cout << this->chrS << "\n"
 			  << this->intS << "\n"
-			  << this->floatS << "f" << "\n"
+			  << this->floatS  << "\n"
 			  << this->doubleS
 			  << std::endl;
 }

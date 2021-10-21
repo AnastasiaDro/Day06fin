@@ -22,6 +22,7 @@ private:
 
 	std::string sign;
 	bool isNan;
+	bool isInf;
 	std::string chrS;
 	std::string intS;
 	std::string floatS;
