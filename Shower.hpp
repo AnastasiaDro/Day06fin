@@ -17,15 +17,25 @@ private:
 	std::string floatS;
 	std::string doubleS;
 
-	const Converter *convPtr;
-
 	void makeIntS();
 	void makeDoubleS();
 	void makeFloatS();
-	void makeCharS();
+	void makeCharS(char c);
+
+	void madeStrings(const Converter &converter);
+	enum Type {
+		TYPE_CHAR,
+		TYPE_INT,
+		TYPE_FLOAT,
+		TYPE_DOUBLE,
+		TYPE_INVALID
+	};
 public:
 	Shower(const Converter &conv);
+	Shower(Shower &orig);
 	~Shower();
+	Shower &operator=(const Shower &orig);
+
 	void showVals();
 };
 

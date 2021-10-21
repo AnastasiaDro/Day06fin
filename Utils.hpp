@@ -11,5 +11,5 @@
 
 void printMsg(std::string const &msg);
 
-
+bool isArgValid(char *s);
 #endif //DAY06_UTILS_HPP

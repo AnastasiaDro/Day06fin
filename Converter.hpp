@@ -21,7 +21,10 @@ private:
 	std::stringstream stream;
 	int type;
 
-
+	std::string chrS;
+	std::string intS;
+	std::string floatS;
+	std::string doubleS;
 
 	void parseInt();
 	void parseDouble();
@@ -31,9 +34,9 @@ private:
 	void findType(); //ищет тип
 	void setVals();
 
+	bool isCharLimits(long tmp);
 
-
-	bool isInLimits(long l);
+	bool isIntLimits(long l);
 	enum Type {
 		TYPE_CHAR,
 		TYPE_INT,
@@ -48,7 +51,15 @@ public:
 	~Converter();
 	Converter &operator=(const Converter &orig);
 
+//getters
+	int getValInt() const;
+	char getValChr() const;
+	float getValFloat() const;
+	double getValDouble() const;
+	int getType() const;
+
 	void convert();
+
 
 	 //показывает значение
 
