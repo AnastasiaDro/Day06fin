@@ -21,12 +21,19 @@ private:
 	std::stringstream stream;
 	int type;
 
-	std::string intS;
-	std::string doubleD;
-	std::string floatF;
-	std::string chrS;
 
 
+	void parseInt();
+	void parseDouble();
+	void parseFloat();
+	void parseChar();
+
+	void findType(); //ищет тип
+	void setVals();
+
+
+
+	bool isInLimits(long l);
 	enum Type {
 		TYPE_CHAR,
 		TYPE_INT,
@@ -41,17 +48,10 @@ public:
 	~Converter();
 	Converter &operator=(const Converter &orig);
 
-	void findType(); //ищет тип
+	void convert();
 
-	void setVals();
+	 //показывает значение
 
-	void parseInt();
-	void parseDouble();
-	void parseFloat();
-	void parseChar();
-
-	bool isInLimits(long l);
-	void showVals(); //показывает значение
 };
 
 
