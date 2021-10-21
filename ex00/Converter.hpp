@@ -61,6 +61,7 @@ public:
 
 	 //показывает значение
 
+	void genString(int i);
 };
 
 

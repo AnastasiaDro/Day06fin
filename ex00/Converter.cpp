@@ -24,7 +24,12 @@ Converter &Converter::operator=(const Converter &orig) {
 	this->val_double = orig.val_double;
 	this->val_float = orig.val_float;
 	this->val_int = orig.val_int;
-	this->chrS = orig.chrS;
+	int i = 0;
+	while(i < 4)
+	{
+		this->strings[i] = orig.strings[i];
+		i++;
+	}
 	return *this;
 }
 
@@ -35,11 +40,11 @@ void Converter::findType() {
 		this->type = TYPE_CHAR;
 		return;
 	}
-	else if (this->_s.find('f') < 0) {
+	else if (this->_s.find('f') > 0) {
 		this->type = TYPE_FLOAT;
 		return;
 	}
-	else if (this->_s.find('.') < 0) {
+	else if (this->_s.find('.') > 0) {
 		this->type = TYPE_DOUBLE;
 		return;
 	}
@@ -71,8 +76,8 @@ void Converter::parseInt() {
 	this->stream >> tmp;
 	if (stream.fail() || !isIntLimits(tmp))
 	{
-		this->intS = "impossible";
-		this->chrS= "impossible";
+		this->strings[TYPE_INT] = "impossible";
+		this->strings[TYPE_CHAR] = "impossible";
 	}
 	else
 	{
@@ -119,7 +124,7 @@ void Converter::parseChar() {
 bool Converter::isIntLimits(long l) {
 	if (l > std::numeric_limits<int>::max() || l < std::numeric_limits<int>::min())
 	{
-		this->intS = "impossible";
+		this->strings[TYPE_INT] = "impossible";
 		return false;
 	}
 	return true;
@@ -146,6 +151,7 @@ void Converter::convert() {
 	}
 	findType();
 	setVals();
+	generateStrings();
 
 }
 
@@ -217,6 +223,47 @@ void Converter::showVals() {
 }
 
 void Converter::generateStrings() {
-
+	int i = 0;
+	while(i < 4)
+	{
+		if(strings[i].empty())
+			genString(i);
+		i++;
+	}
 }
+
+void Converter::genString(int i) {
+	std::stringstream ss;
+	std::string tmp;
+	switch (i) {
+		case TYPE_CHAR:
+			tmp = &this->val_chr;
+			strings[TYPE_CHAR] = "char: " + tmp;
+			break;
+		case TYPE_INT:
+			ss << val_int;
+			ss >> tmp;
+			strings[TYPE_INT] = "int: " + tmp;
+			break;
+		case TYPE_FLOAT:
+			ss << val_float;
+			ss >> tmp;
+			strings[TYPE_FLOAT] = "float: " + tmp;
+			if (strings[TYPE_FLOAT].find('.') <= 0)
+				strings[TYPE_FLOAT] += "0";
+			strings[TYPE_FLOAT] += "f";
+			break;
+		case TYPE_DOUBLE:
+			ss << val_double;
+			ss >> tmp;
+			strings[TYPE_DOUBLE] = "double: " + tmp;
+			if (strings[TYPE_FLOAT].find('.') <= 0)
+				strings[TYPE_FLOAT] += ".0";
+			break;
+		default:
+			break;
+	}
+	ss.clear();
+}
+
 
