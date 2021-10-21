@@ -19,5 +19,8 @@ void printDouble(double d, double rem);
 
 void printFloat(float f, double rem);
 
+bool checkArg(int argc, char *str);
+
+
 std::string getStringFromDouble(double d);
 #endif //DAY06_UTILS_HPP

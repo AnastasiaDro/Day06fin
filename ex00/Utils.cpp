@@ -47,7 +47,7 @@ void printDouble(double d, double rem)
 	double zero = 0;
 
 	std::cout << "double: " << d;
-	if (rem == zero)
+	if (rem == zero && d != std::numeric_limits<double>::infinity() && d != -std::numeric_limits<double>::infinity())
 		std::cout << ".0";
 	std::cout << std::endl;
 }
@@ -55,8 +55,8 @@ void printDouble(double d, double rem)
 void printFloat(float f, double rem)
 {
 	double zero = 0;
-	std::cout << "float: "  << f;
-	if (rem == zero)
+	std::cout << "float: " << f;
+	if (rem == zero && f != std::numeric_limits<float>::infinity() && f != -std::numeric_limits<float>::infinity())
 		std::cout << ".0";
 	std::cout << "f" << std::endl;
 }
@@ -68,4 +68,21 @@ std::string getStringFromDouble(double d)
 	std::string tmp;
 	ss >> tmp;
 	return tmp;
+}
+bool checkArg(int argc, char *str)
+{
+	if (argc != 2)
+		return false;
+
+	if(!strcmp(str, "nan") || !strcmp(str, "nanf") || !strcmp(str, "inf") || !strcmp(str, "inff") \
+			|| !strcmp(str, "+inf") || !strcmp(str, "+inff") || !strcmp(str, "-inf") || !strcmp(str, "-inff"))
+		return true;
+	int i = 0;
+	if(str[i] == '+' || str[i] == '-')
+		i++;
+	while(str[i] && std::isdigit(str[i]))
+		i++;
+	if (str[i])
+		return false;
+	return true;
 }
