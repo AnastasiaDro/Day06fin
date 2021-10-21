@@ -35,9 +35,7 @@ void printInt(int i, double d)
 	double max = INT_MAX;
 
 	if (d < min || d > max || getStringFromDouble(d) == "nan")
-	{
 		printMsg("int: impossible");
-	}
 	else
 		std::cout << "int: " << i << std::endl;
 }
@@ -73,14 +71,21 @@ bool checkArg(int argc, char *str)
 {
 	if (argc != 2)
 		return false;
-
 	if(!strcmp(str, "nan") || !strcmp(str, "nanf") || !strcmp(str, "inf") || !strcmp(str, "inff") \
 			|| !strcmp(str, "+inf") || !strcmp(str, "+inff") || !strcmp(str, "-inf") || !strcmp(str, "-inff"))
 		return true;
 	int i = 0;
 	if(str[i] == '+' || str[i] == '-')
 		i++;
+	if (!std::isdigit(str[i]))
+		return false;
 	while(str[i] && std::isdigit(str[i]))
+		i++;
+	if (str[i] == '.')
+		i++;
+	while(str[i] && std::isdigit(str[i]))
+		i++;
+	if (str[i] == 'f')
 		i++;
 	if (str[i])
 		return false;
