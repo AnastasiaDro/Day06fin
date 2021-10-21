@@ -54,11 +54,7 @@ public:
 	Converter &operator=(const Converter &orig);
 	bool isArgValid();
 //getters
-	int getValInt() const;
 	char getValChr() const;
-	float getValFloat() const;
-	double getValDouble() const;
-	int getType() const;
 
 	void convert();
 	void showVals();

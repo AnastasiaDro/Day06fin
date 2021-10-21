@@ -148,25 +148,11 @@ void Converter::convert() {
 	setVals();
 }
 
-int Converter::getValInt() const {
-	return val_int;
-}
 
 char Converter::getValChr() const {
 	return val_chr;
 }
 
-float Converter::getValFloat() const {
-	return val_float;
-}
-
-double Converter::getValDouble() const {
-	return val_double;
-}
-
-int Converter::getType() const {
-	return type;
-}
 
 bool Converter::isCharLimits(long tmp) {
 	if (tmp < 0 || tmp > 127)
