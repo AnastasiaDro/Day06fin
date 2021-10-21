@@ -128,46 +128,46 @@ bool Converter::isIntLimits(long l) {
 void Converter::convert() {
 	if (this->isNan)
 	{
-		this->chrS = "impossible";
-		this->intS = "impossible";
-		this->doubleS = sign + "nan";
-		this->floatS = sign + "nanf";
+		this->strings[TYPE_CHAR] = "impossible";
+		this->strings[TYPE_INT] = "impossible";
+		this->strings[TYPE_DOUBLE] = sign + "nan";
+		this->strings[TYPE_FLOAT]= sign + "nanf";
 		return;
 	}
 	if (this->isInf)
 	{
 		if (this->sign.empty())
 			sign = "+";
-		this->chrS = "impossible";
-		this->intS = "impossible";
-		this->doubleS = sign + "inf";
-		this->floatS = sign + "inff";
+		this->strings[TYPE_CHAR] = "impossible";
+		this->strings[TYPE_INT] = "impossible";
+		this->strings[TYPE_DOUBLE]= sign + "inf";
+		this->strings[TYPE_FLOAT] = sign + "inff";
 		return;
 	}
 	findType();
 	setVals();
-}
 
+}
 
 char Converter::getValChr() const {
 	return val_chr;
 }
 
-
 bool Converter::isCharLimits(long tmp) {
 	if (tmp < 0 || tmp > 127)
 	{
-		this->chrS = "impossible";
+		this->strings[TYPE_CHAR] = "impossible";
 		return false;
 	}
 	if (tmp < 33  || tmp > 126)
 	{
-		this->chrS = "Non displayable";
+		this->strings[TYPE_CHAR] = "Non displayable";
 		return false;
 	}
 	return true;
 }
 
+////done
 bool Converter::isArgValid() {
 	int i = 0;
 	int flagDot = 0;
@@ -206,11 +206,17 @@ bool Converter::isArgValid() {
 	return true;
 }
 
+////done
 void Converter::showVals() {
-	std::cout << this->chrS << "\n"
-			  << this->intS << "\n"
-			  << this->floatS  << "\n"
-			  << this->doubleS
-			  << std::endl;
+	int i = 0;
+	while(i < 4)
+	{
+		std::cout << strings[i] << std::endl;
+		i++;
+	}
+}
+
+void Converter::generateStrings() {
+
 }
 

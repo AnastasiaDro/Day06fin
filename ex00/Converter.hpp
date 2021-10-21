@@ -23,10 +23,8 @@ private:
 	std::string sign;
 	bool isNan;
 	bool isInf;
-	std::string chrS;
-	std::string intS;
-	std::string floatS;
-	std::string doubleS;
+
+	std::string strings[4];
 
 	void parseInt();
 	void parseDouble();
@@ -39,6 +37,8 @@ private:
 	bool isCharLimits(long tmp);
 
 	bool isIntLimits(long l);
+
+	void generateStrings();
 	enum Type {
 		TYPE_CHAR,
 		TYPE_INT,
