@@ -1,8 +1,7 @@
 NAME = convert
 
-SRC = main.cpp Converter.cpp Utils.cpp
-
-HEAD = Converter.hpp Utils.hpp
+SRC = main.cpp Utils.cpp
+HEAD = Utils.hpp
 
 OBJS = $(SRC:.cpp=.o)
 

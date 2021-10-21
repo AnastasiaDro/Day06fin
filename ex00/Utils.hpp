@@ -11,5 +11,13 @@
 
 void printMsg(std::string const &msg);
 
-bool isArgValid(char *s);
+void printChr(char c, double d);
+
+void printInt(int i, double d);
+
+void printDouble(double d, double rem);
+
+void printFloat(float f, double rem);
+
+std::string getStringFromDouble(double d);
 #endif //DAY06_UTILS_HPP
