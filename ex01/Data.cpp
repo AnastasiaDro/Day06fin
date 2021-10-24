@@ -33,7 +33,7 @@ Data &Data::operator=(const Data &orig) {
 
 std::ostream &operator<<(std::ostream &out, Data data)
 {
-	std::cout	<< "Data: Name :"
+	std::cout	<< "Data: Name: "
 				<< data.getMe()
 				<< " age: " << data.getNum();
 	return out;
